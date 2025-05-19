@@ -7,10 +7,26 @@ function App() {
   //State local puede guardar db directo 
   const [data, setData] = useState([])
 
+  // Correcto si no genermos manejar detalles especificos del carrito sino generar nuevo registro
+  //const [card, setCard] = useState([])
+  const [cart, setCard] = useState([])
+
+  function addToCart(item) {
+    const itemExists = cart.findIndex((guitar) => guitar.id === item.id)
+    if(itemExists !== -1) {
+      item.quantity += 1  
+      console.log("Ya existe en el carrito")
+    } else {
+      item.quantity = 1  
+      setCard((prevCart) => [...prevCart, item])
+    }
+  }
+
   // useEffect para API no es el caso pero hay que practicar
   useEffect(() => {
     setData(db)
   }, [])
+
   return (
     <>
       <Header/>
@@ -19,18 +35,14 @@ function App() {
           <h2 className="text-center">Nuestra Colección</h2>
 
           <div className="row mt-5">
-            <Guitar/>
-            <Guitar/>
-            <Guitar/>
-            <Guitar/>
-            <Guitar/>
-            <Guitar/>
-            <Guitar/>
-            <Guitar/>
-            <Guitar/>
-            <Guitar/>
-            <Guitar/>
-            <Guitar/>
+            {data.map((guitarra) => (
+              <Guitar
+                key={guitarra.id}
+                guitarra = {guitarra}
+                setCard={setCard}
+                addToCart={addToCart}
+              />
+            ))}
           </div>
       </main>
 
