@@ -1,14 +1,16 @@
+import { useEffect, useState } from "react"
 import Header from "./components/Header"
 import Guitar from "./components/Guitar"
-import { useState } from "react"
+import { db } from "./data/db"
 
 function App() {
+  //State local puede guardar db directo 
+  const [data, setData] = useState([])
 
-  // State
-  const [auth, setAuth] = useState(false)
-  const [total, setTotal] = useState(0)
-  const [cart, setCart] = useState([])
-
+  // useEffect para API no es el caso pero hay que practicar
+  useEffect(() => {
+    setData(db)
+  }, [])
   return (
     <>
       <Header/>
@@ -17,6 +19,17 @@ function App() {
           <h2 className="text-center">Nuestra Colección</h2>
 
           <div className="row mt-5">
+            <Guitar/>
+            <Guitar/>
+            <Guitar/>
+            <Guitar/>
+            <Guitar/>
+            <Guitar/>
+            <Guitar/>
+            <Guitar/>
+            <Guitar/>
+            <Guitar/>
+            <Guitar/>
             <Guitar/>
           </div>
       </main>
